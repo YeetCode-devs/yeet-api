@@ -100,7 +100,9 @@ class Device:
         self.repo.remote().pull(rebase=True)
 
         if not self._exists():
-            raise exceptions.NoSuchDevice(f"Device {self.brand}/{self.model}.json does not exist")
+            raise exceptions.NoSuchDevice(
+                f"Device {self.brand}/{self.model}.json does not exist"
+            )
 
         self.devicejson = _DeviceJSON(Path(self.device))
 
