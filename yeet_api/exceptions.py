@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: MIT
 
+
 class InvalidConfigError(Exception):
     pass
 
