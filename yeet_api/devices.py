@@ -5,6 +5,7 @@ import json
 import logging
 
 from pathlib import Path
+
 # from typing import Any
 from git.repo import Repo
 from . import exceptions, CACHE_DIR, YEET_DEVICES_REPO
@@ -81,9 +82,7 @@ class Device:
         self.model: str = model
         self.repopath: os.PathLike = Path(CACHE_DIR).joinpath("yeet-devices")
         self.device: Path = (
-            Path(self.repopath)
-            .joinpath(self.brand)
-            .joinpath(self.model + ".json")
+            Path(self.repopath).joinpath(self.brand).joinpath(self.model + ".json")
         )
         self.repo: Repo
         self.devicejson: _DeviceJSON
