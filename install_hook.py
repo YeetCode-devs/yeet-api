@@ -1,3 +1,5 @@
+# SPDX-License-Identifier
+
 from pathlib import Path
 
 
