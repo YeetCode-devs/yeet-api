@@ -127,6 +127,4 @@ class Device:
 
     def get_resource(self, resource_name: str) -> dict | None:
         """Get a resource for a device."""
-        if res := self.devicejson.json["resources"].get(resource_name):
-            return res
-        return None
+        return self.devicejson.json["resources"].get(resource_name)
