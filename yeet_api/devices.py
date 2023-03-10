@@ -24,7 +24,7 @@ class _DeviceJSON:
 
     The basic structure that must be followed:
     {
-        "full_name": str,
+        "fullname": str,
         "codename": str,
         "resources": {
             "recovery": {"name": "link"},
@@ -52,13 +52,13 @@ class _DeviceJSON:
             )
 
         if (
-            not self._json.get("full_name")
+            not self._json.get("fullname")
             or not self._json.get("codename")
             or not self._json.get("resources")
         ):
             raise exceptions.InvalidConfigError(
                 "Incomplete device config; must "
-                "consist of: {full_name, codename, "
+                "consist of: {fullname, codename, "
                 f"resources}} [{devicejson.name}]"
             )
 
@@ -112,9 +112,9 @@ class Device:
         return True
 
     @property
-    def full_name(self) -> str:
+    def fullname(self) -> str:
         """Get full device name."""
-        return self.devicejson.json.get("full_name", "")
+        return self.devicejson.json.get("fullname", "")
 
     @property
     def codename(self) -> str:
