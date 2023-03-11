@@ -10,7 +10,7 @@ poetry run install-hook
 python -m black .
 
 for file in $(git diff --cached --name-only); do
-    git add $file
+    test -f $file && git add $file
 done"""
 
 
