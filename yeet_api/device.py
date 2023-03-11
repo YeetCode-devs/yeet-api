@@ -128,3 +128,7 @@ class Device:
     def get_resource(self, resource_name: str) -> dict | None:
         """Get a resource for a device."""
         return self.devicejson.json["resources"].get(resource_name)
+
+    def update_database(self, gitflags: dict = {"rebase": True}) -> None:
+        """Update device database by running a git pull."""
+        self.repo.remote().pull(*gitflags)
