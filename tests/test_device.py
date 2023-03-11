@@ -8,7 +8,11 @@ class DeviceTest(TestCase):
     def setUp(self):
         self.device = Device("testbrand", "testmodel")
 
-    def test_device(self):
+    def test_attr(self):
+        self.assertEqual(self.device.brand, "testbrand")
+        self.assertEqual(self.device.model, "testmodel")
+
+    def test_device_metadata(self):
         self.assertEqual(self.device.fullname, "Test Device")
         self.assertEqual(self.device.codename, "TESTDEV123")
 
