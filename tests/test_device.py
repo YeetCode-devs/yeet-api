@@ -9,7 +9,7 @@ class DeviceTest(TestCase):
         self.device = Device("testbrand", "testmodel")
 
     def test_device(self):
-        self.assertEqual(self.device.full_name, "Test Device")
+        self.assertEqual(self.device.fullname, "Test Device")
         self.assertEqual(self.device.codename, "TESTDEV123")
 
     def test_resources(self):
