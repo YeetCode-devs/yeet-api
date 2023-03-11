@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 from unittest import TestCase
-from yeet_api.devices import Device, _DeviceJSON
+from yeet_api.device import Device, _DeviceJSON
 
 
 class DeviceTest(TestCase):
