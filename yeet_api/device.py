@@ -129,6 +129,11 @@ class Device:
         """Get a resource for a device."""
         return self.devicejson.json["resources"].get(resource_name)
 
-    def update_database(self, gitflags: dict = {"rebase": True}) -> None:
-        """Update device database by running a git pull."""
-        self.repo.remote().pull(*gitflags)
+    def update_database(self, **kwargs) -> None:
+        """Update device database by running a git pull.
+
+        Args:
+            **kwargs: Flags to be passed to git. By default rebase=True is
+                set. Pass rebase=False to override.
+        """
+        self.repo.remote().pull(**{"rebase": True} | kwargs)
