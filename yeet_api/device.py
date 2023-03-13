@@ -126,7 +126,13 @@ class Device:
             A :obj:`tuple` of available resources provided by the device json.
 
         """
-        return tuple(self.devicejson.json.get("resources", {}).keys())
+
+        # The reason dict['key'] is used here because the resources key from
+        # the device json should've been properly checked by the _DeviceJSON
+        # class. If it somehow does not exist when we try to access it here,
+        # something has gone seriously wrong, so we just let an exception be
+        # raised.
+        return tuple(self.devicejson.json["resources"].keys())
 
     def get_resource(self, resource_name: str) -> dict | None:
         """Get a resource for a device.
@@ -138,6 +144,8 @@ class Device:
             A :obj:`dict` if device is found, :obj:`None` otherwise.
 
         """
+
+        # Same reason as the one in get_available_resources() above.
         return self.devicejson.json["resources"].get(resource_name)
 
     def update_database(self, **kwargs) -> None:
