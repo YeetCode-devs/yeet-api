@@ -33,8 +33,6 @@ class _DeviceJSON:
         }
     }
 
-    Returns:
-        _type_: _description_
     """
 
     def __init__(self, devicejson: Path) -> None:
@@ -106,14 +104,14 @@ class Device:
         self.devicejson = _DeviceJSON(Path(self.device))
 
     def _exists(self) -> bool:
-        """Returns true if such device exist, false otherwise."""
+        """Returns True if such device exist, False otherwise."""
         if not self.device.is_file():
             return False
         return True
 
     @property
     def fullname(self) -> str:
-        """Get full device name."""
+        """Returns full device name."""
         return self.devicejson.json.get("fullname", "")
 
     @property
@@ -122,11 +120,24 @@ class Device:
         return self.devicejson.json.get("codename", "")
 
     def get_available_resources(self) -> tuple[str]:
-        """Get available resources provided by the device JSON."""
+        """Get available resources provided by the device JSON.
+
+        Returns:
+            A :obj:`tuple` of available resources provided by the device json.
+
+        """
         return tuple(self.devicejson.json.get("resources", {}).keys())
 
     def get_resource(self, resource_name: str) -> dict | None:
-        """Get a resource for a device."""
+        """Get a resource for a device.
+
+        Args:
+            resource_name: The name of the resource to be fetched from the device json.
+
+        Returns:
+            A :obj:`dict` if device is found, :obj:`None` otherwise.
+
+        """
         return self.devicejson.json["resources"].get(resource_name)
 
     def update_database(self, **kwargs) -> None:
@@ -135,5 +146,6 @@ class Device:
         Args:
             **kwargs: Flags to be passed to git. By default rebase=True is
                 set. Pass rebase=False to override.
+
         """
         self.repo.remote().pull(**{"rebase": True} | kwargs)
