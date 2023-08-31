@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yeet-api"
-version = "0.1.0"
+version = "0.2.0"
 description = "Core API for yeet tools"
 authors = ["YeetCode Developers <YeetCode-devs@protonmail.com>"]
 license = "MIT"
