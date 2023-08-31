@@ -1,8 +1,15 @@
 # SPDX-License-Identifier: MIT
 
 import os
+import distutils.spawn
 
 from pathlib import Path
+
+if not distutils.spawn.find_executable("git"):
+    raise FileNotFoundError("Git executable is not found."
+                            "\nFor Windows, install it from https://git-scm.com/downloads"
+                            "\nFor Linux, it is best to use your distro package manager. If "
+                            "for some reason you can't, use the link for Windows.")
 
 _config_dir = Path(os.getenv("HOME", "")).joinpath(".config", "yeet")
 if not _config_dir.exists():
