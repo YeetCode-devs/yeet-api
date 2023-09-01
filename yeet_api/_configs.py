@@ -45,4 +45,4 @@ class _Config:
         if isinstance(data, dict):
             self._data = data
         else:
-            raise ValueError(f"Expecting dict, got {type(data)} instead")
+            raise ValueError(f"Expected dict, got {type(data)} instead")
