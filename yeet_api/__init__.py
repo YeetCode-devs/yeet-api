@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
 
 import os
-import distutils.spawn
+import shutil
 
 from pathlib import Path
 
-if not distutils.spawn.find_executable("git"):
+if not shutil.which("git"):
     raise FileNotFoundError("Git executable is not found."
                             "\nFor Windows, install it from https://git-scm.com/downloads"
                             "\nFor Linux, it is best to use your distro package manager. If "
