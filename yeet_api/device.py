@@ -35,10 +35,10 @@ class _DeviceJSON:
 
     """
 
-    def __init__(self, devicejson: Path) -> None:
+    def __init__(self, jsonfile: Path) -> None:
         self._json: dict
 
-        with open(devicejson, "r") as f:
+        with open(jsonfile, "r") as f:
             self._json = json.load(f)
 
         # JSON sanity checks
@@ -46,7 +46,7 @@ class _DeviceJSON:
         if not isinstance(self._json, dict):
             raise exceptions.InvalidConfigError(
                 "JSON must contain an object (dict), "
-                f"not an array (list) [{devicejson.name}]"
+                f"not an array (list) [{jsonfile.name}]"
             )
 
         if (
@@ -57,7 +57,7 @@ class _DeviceJSON:
             raise exceptions.InvalidConfigError(
                 "Incomplete device config; must "
                 "consist of: {fullname, codename, "
-                f"resources}} [{devicejson.name}]"
+                f"resources}} [{jsonfile.name}]"
             )
 
     @property
@@ -119,7 +119,7 @@ class Device:
         """Get device codename."""
         return self.devicejson.json.get("codename", "")
 
-    def get_available_resources(self) -> tuple[str]:
+    def get_available_resources(self) -> tuple[str, ...]:
         """Get available resources provided by the device JSON.
 
         Returns:
@@ -133,6 +133,10 @@ class Device:
         # something has gone seriously wrong, so we just let an exception be
         # raised.
         return tuple(self.devicejson.json["resources"].keys())
+
+    def is_resource_exist(self, resource_name: str) -> bool:
+        """Determine whether a resource exist."""
+        return bool(self.devicejson.json["resources"].get(resource_name))
 
     def get_resource(self, resource_name: str) -> dict | None:
         """Get a resource for a device.
@@ -156,4 +160,4 @@ class Device:
                 set. Pass rebase=False to override.
 
         """
-        self.repo.remote().pull(**{"rebase": True} | kwargs)
+        self.repo.remote().pull(**{"rebase": True} | kwargs)  # type: ignore
